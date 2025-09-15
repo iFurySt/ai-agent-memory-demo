@@ -1,0 +1,31 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo123
+      POSTGRES_DB: langgraph_demo
+    ports:
+      - "65432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: ai-agent-memory-demo
+    depends_on:
+      - db
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+      POSTGRES_URI: postgres://demo:demo123@db:5432/langgraph_demo
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    stdin_open: true
+    tty: true
+
+volumes:
+  db_data:

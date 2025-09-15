@@ -1,0 +1,16 @@
+# LangChain provider for OpenAI (1.0 alpha)
+langchain-openai==1.0.0a2
+
+# LangGraph core (1.0 alpha)
+langgraph==1.0.0a3
+
+# LangGraph checkpoint persistence for Postgres
+langgraph-checkpoint-postgres>=1.0.0a3
+
+# PostgreSQL driver (psycopg3, binary build)
+psycopg[binary]==3.2.10
+
+# SQLAlchemy for managing schema / queries
+sqlalchemy>=2.0
+
+python-dotenv
